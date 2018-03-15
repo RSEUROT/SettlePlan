@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class AgentGoap : MonoBehaviour
 {
+    public string currentState = "";
+
     private FSM stateMachine;
 
     private FSMState idleState; // finds something to do
@@ -16,13 +18,26 @@ public class AgentGoap : MonoBehaviour
     private List<ActionGoap> currentActions;
     private PlannerGoap myPlanner;
 
+    private bool hasABehaviour;
+
+    private string PeopleDatasName;
+    public string previousPeopleDatasName = "";
+
     private IGoap PeopleDatas;
 
     private NavMeshAgent agent;
     private Animator anim;
 
-    void Start ()
+    [SerializeField]
+    private float currentHungryRate;
+    [SerializeField]
+    private float maxHungryRate = 100.0f;
+
+    public float ratio;
+
+    void Start()
     {
+        hasABehaviour = false;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
 
@@ -33,30 +48,92 @@ public class AgentGoap : MonoBehaviour
 
         myPlanner = new PlannerGoap();
 
-        FindPeopleDatas();
+        CheakForJobs();
 
-        idleState = IdleState;
-        moveToState = MoveToState;
-        performActionState = PerformAction;
-
-        stateMachine.pushState(idleState);
-        LoadActions();
+        EconomicBrainGoap.Instance.AgentInactive(this);
     }
 
-    private void FindPeopleDatas()
+    private bool FindPeopleDatas()
     {
+        hasABehaviour = false;
         foreach (Component comp in gameObject.GetComponents(typeof(Component)))
         {
             if (typeof(IGoap).IsAssignableFrom(comp.GetType()))
             {
                 PeopleDatas = (IGoap)comp;
-                return;
+                previousPeopleDatasName = PeopleDatasName;
+                PeopleDatasName = PeopleDatas.ToString();
+                hasABehaviour = true;
+                break;
             }
         }
+
+        return hasABehaviour;
     }
+    public void RemovePeopleDatas()
+    {
+        
+        foreach (Component comp in gameObject.GetComponents(typeof(Component)))
+        {
+            if (typeof(IGoap).IsAssignableFrom(comp.GetType()))
+            {
+                //PeopleDatas = null;
+                Destroy(comp);
+                hasABehaviour = false;
+                availableActions.Clear();
+                break;
+            }
+        }
+        if (currentActions != null && currentActions.Count >= 1)
+        {
+            ActionGoap action = currentActions[0];
+            if (action.GetAnimationName() != string.Empty)
+                anim.SetBool(action.GetAnimationName(), false);
+        }
+    }
+
+    public void Eat()
+    {
+        currentHungryRate = maxHungryRate;
+        RemovePeopleDatas();
+
+        if (previousPeopleDatasName.Contains("Logger"))
+        {
+            this.gameObject.AddComponent<Logger>();
+            GetComponent<Logger>().SetDefaultActions();
+        }
+        else if (previousPeopleDatasName.Contains("Blacksmith"))
+        {
+            this.gameObject.AddComponent<Blacksmith>();
+            GetComponent<Blacksmith>().SetDefaultActions();
+        }
+        else if (previousPeopleDatasName.Contains("Cooker"))
+        {
+            this.gameObject.AddComponent<Cooker>();
+            GetComponent<Cooker>().SetDefaultActions();
+        }
+        else if (previousPeopleDatasName.Contains("Eater"))
+        {
+            this.gameObject.AddComponent<Eater>();
+            GetComponent<Eater>().SetDefaultActions();
+        }
+        else if (previousPeopleDatasName.Contains("Farmer"))
+        {
+            this.gameObject.AddComponent<Farmer>();
+            GetComponent<Farmer>().SetDefaultActions();
+        }
+        else if (previousPeopleDatasName.Contains("Miner"))
+        {
+            this.gameObject.AddComponent<Miner>();
+            GetComponent<Miner>().SetDefaultActions();
+        }
+
+
+    }
+
     private void IdleState(FSM fsm, GameObject gameObj)
     {
-
+        currentState = "idle";
         List<KeyValuePair<string, object>> worldState = PeopleDatas.GetWorldState();
         List<KeyValuePair<string, object>> goal = PeopleDatas.CreateGoalState();
 
@@ -80,10 +157,14 @@ public class AgentGoap : MonoBehaviour
             PeopleDatas.PlanFailed(goal);
             fsm.popState(); // move back to IdleAction state
             fsm.pushState(idleState);
+
+            CheakForJobs();
         }
+
     }
     private void MoveToState(FSM fsm, GameObject gameObj)
     {
+        currentState = "moveto";
         // move the game object
         ActionGoap action = currentActions[0];
         if (action.RequiresInRange() && action.MyTarget == null)
@@ -103,7 +184,7 @@ public class AgentGoap : MonoBehaviour
     }
     private void PerformAction(FSM fsm, GameObject gameObj)
     {
-
+        currentState = "perform";
         // perform the action
         agent.destination = transform.position;
         if (!HasActionPlan())
@@ -166,6 +247,8 @@ public class AgentGoap : MonoBehaviour
             fsm.popState();
             fsm.pushState(idleState);
             PeopleDatas.ActionsFinished();
+
+            EconomicBrainGoap.Instance.AgentInactive(this);
         }
     }
     
@@ -173,9 +256,34 @@ public class AgentGoap : MonoBehaviour
     void Update ()
     {
         anim.SetFloat("speed", Vector3.Magnitude(agent.velocity));
-        stateMachine.Update(this.gameObject);
-	}
+        if(hasABehaviour)
+            stateMachine.Update(this.gameObject);
 
+        UpdateHungry();
+        if (!hasABehaviour)
+        {
+            CheakForJobs();
+        }
+    }
+    private void UpdateHungry()
+    {
+        currentHungryRate -= (Time.deltaTime * maxHungryRate * 0.0001f);
+        ratio = currentHungryRate / maxHungryRate;
+        currentHungryRate = (currentHungryRate >= 0.0f) ? currentHungryRate : 0.0f;
+    }
+
+    public void CheakForJobs()
+    {
+        if (FindPeopleDatas())
+        {
+            idleState = IdleState;
+            moveToState = MoveToState;
+            performActionState = PerformAction;
+
+            stateMachine.pushState(idleState);
+            LoadActions();
+        }
+    }
     public void AddAction(ActionGoap a)
     {
         availableActions.Add(a);

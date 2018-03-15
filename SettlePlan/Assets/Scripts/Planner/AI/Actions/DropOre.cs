@@ -68,9 +68,9 @@ public class DropOre : ActionGoap
     public override bool Perform(GameObject agent)
     {
         PeopleInventory myInventory = (PeopleInventory)agent.GetComponent(typeof(PeopleInventory));
-        targetSupplyPile.NumLogs += myInventory.NumLogs;
+        targetSupplyPile.UpdateNumOres(myInventory.NumOres);
         droppedOffOres = true;
-        myInventory.NumLogs = 0;
+        myInventory.NumOres = 0;
 
         return true;
     }

@@ -9,10 +9,10 @@ public class MineOre : ActionGoap
     private float timerToPerform = 0.0f;
 
     [SerializeField]
-    private float workDuration = 2.0f;
+    private float workDuration = 5.0f;
 
     [SerializeField]
-    private int oresGain = 1;
+    private int oresGain = 2;
     [SerializeField]
     private int randomAroundGains = 1;
 

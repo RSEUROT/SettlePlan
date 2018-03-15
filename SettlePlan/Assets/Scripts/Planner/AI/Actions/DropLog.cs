@@ -68,7 +68,7 @@ public class DropLog : ActionGoap
     public override bool Perform(GameObject agent)
     {
         PeopleInventory myInventory = (PeopleInventory)agent.GetComponent(typeof(PeopleInventory));
-        targetSupplyPile.NumLogs += myInventory.NumLogs;
+        targetSupplyPile.UpdateNumLogs(myInventory.NumLogs);
         droppedOffLogs = true;
         myInventory.NumLogs = 0;
 

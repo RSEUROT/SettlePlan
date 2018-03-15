@@ -12,7 +12,7 @@ public class CutWood : ActionGoap
     private float workDuration = 2.0f;
 
     [SerializeField]
-    private int logsGain = 1;
+    private int logsGain = 10;
     [SerializeField]
     private int randomAroundGains = 1;
 

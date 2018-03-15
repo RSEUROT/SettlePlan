@@ -141,9 +141,14 @@ GameObject:
   - component: {fileID: 4971318102194916}
   - component: {fileID: 195453553940801616}
   - component: {fileID: 114396515715479282}
-  - component: {fileID: 114245541503838842}
-  - component: {fileID: 114812945610280072}
-  - component: {fileID: 114531550753988744}
+  - component: {fileID: 114195424453694828}
+  - component: {fileID: 114804905900192408}
+  - component: {fileID: 114964617632748296}
+  - component: {fileID: 114234627229030260}
+  - component: {fileID: 114123312172334560}
+  - component: {fileID: 114654079797657642}
+  - component: {fileID: 114994712261734060}
+  - component: {fileID: 114295453843275696}
   m_Layer: 0
   m_Name: FemelePeasant
   m_TagString: Untagged
@@ -2025,7 +2030,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114245541503838842
+--- !u!114 &114123312172334560
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2033,10 +2038,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 1173272548651852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f403f9bbd7403d745b8ff666192791c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 15fec661b6e0a65488d936990ffea87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 5
+--- !u!114 &114195424453694828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173272548651852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8624b428054f1724e8ab1ec6870240f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+--- !u!114 &114234627229030260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173272548651852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17651996aefa04a4fa57fb5f5aea5e51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 3
+  workDuration: 5
+  oresGain: 1
+  randomAroundGains: 1
+--- !u!114 &114295453843275696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173272548651852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7646c62a669fc6e45bc8d6419447e555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 10
+  logResourcesNeeded: 15
+  OreResourcesNeeded: 20
+  ObjectToBuildPrefab: {fileID: 0}
+  workDuration: 20
 --- !u!114 &114396515715479282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2048,7 +2096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cf76bb82f5f02478dde83f1da3e586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114531550753988744
+--- !u!114 &114654079797657642
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2056,11 +2104,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1173272548651852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8624b428054f1724e8ab1ec6870240f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 44582c9250e115a43955a2cc868a3590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 2
---- !u!114 &114812945610280072
+  cost: 1
+  numOresNeeded: 15
+--- !u!114 &114804905900192408
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2071,10 +2120,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aae6ec1782222d418fa1b5f6bc09a97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 2
+  cost: 3
   workDuration: 2
   logsGain: 1
   randomAroundGains: 1
+--- !u!114 &114964617632748296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173272548651852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cc0f12f2a149104aac940a4ab2ccf7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+--- !u!114 &114994712261734060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173272548651852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512be2113c4c5194ba4f1f2fadd0a087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 1
+  numLogsNeeded: 20
 --- !u!137 &137867582348583384
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

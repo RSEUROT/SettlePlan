@@ -25,8 +25,8 @@ GameObject:
   m_Name: Ext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1127837627981950
 GameObject:
@@ -42,8 +42,8 @@ GameObject:
   m_Name: Lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1161714842467334
 GameObject:
@@ -59,8 +59,8 @@ GameObject:
   m_Name: Ornament
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1240742992234122
 GameObject:
@@ -76,8 +76,8 @@ GameObject:
   m_Name: Medieval_Windmill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1647886466175414
 GameObject:
@@ -93,8 +93,8 @@ GameObject:
   m_Name: Fan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1652059043663850
 GameObject:
@@ -185,7 +185,7 @@ Transform:
   m_GameObject: {fileID: 1240742992234122}
   m_LocalRotation: {x: -0, y: 0.36447054, z: -0, w: 0.9312149}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4253907568995656}
   - {fileID: 4865475590000048}

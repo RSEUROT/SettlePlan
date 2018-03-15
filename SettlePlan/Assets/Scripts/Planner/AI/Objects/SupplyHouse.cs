@@ -4,49 +4,42 @@ using UnityEngine;
 
 public class SupplyHouse : MonoBehaviour, ObjectStatic
 {
-    [SerializeField]
-    private int numLogs;
-    [SerializeField]
-    private int numOres;
-    [SerializeField]
-    private int numFoods;
-
-    public int NumLogs
+    public int GetNumLogs()
     {
-        get
-        {
-            return numLogs;
-        }
-
-        set
-        {
-            numLogs = value;
-        }
+        return EconomicBrainGoap.Instance.NumLogs;
     }
-    public int NumFoods
+    public void UpdateNumLogs(int _num)
     {
-        get
-        {
-            return numFoods;
-        }
-
-        set
-        {
-            numFoods = value;
-        }
+        EconomicBrainGoap.Instance.NumLogs += _num;
     }
-    public int NumOres
+
+    public int GetNumOres()
     {
-        get
-        {
-            return numOres;
-        }
-
-        set
-        {
-            numOres = value;
-        }
+        return EconomicBrainGoap.Instance.NumOres;
     }
+    public void UpdateNumOres(int _num)
+    {
+        EconomicBrainGoap.Instance.NumOres += _num;
+    }
+
+    public int GetNumBlee()
+    {
+        return EconomicBrainGoap.Instance.NumBlee;
+    }
+    public void UpdateNumBlee(int _num)
+    {
+        EconomicBrainGoap.Instance.NumBlee += _num;
+    }
+
+    public int GetNumBread()
+    {
+        return EconomicBrainGoap.Instance.NumBreads;
+    }
+    public void UpdateNumBread(int _num)
+    {
+        EconomicBrainGoap.Instance.NumBreads += _num;
+    }
+
 
     [SerializeField]
     private float remainingDistance;

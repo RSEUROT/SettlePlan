@@ -8,7 +8,7 @@ using UnityEngine.AI;
 
 public abstract class People : MonoBehaviour, IGoap
 {
-    public float moveSpeed = 1;
+    public float moveSpeed = 3;
 
     private NavMeshAgent agent;
     private bool hasAlreadyADestination;
@@ -35,6 +35,9 @@ public abstract class People : MonoBehaviour, IGoap
         List<KeyValuePair<string, object>> WorldData = new List<KeyValuePair<string, object>>();
 
         WorldData.Add(new KeyValuePair<string, object>("hasLogs", (myInventory.NumLogs > 0)));
+        WorldData.Add(new KeyValuePair<string, object>("hasOres", (myInventory.NumOres > 0)));
+        WorldData.Add(new KeyValuePair<string, object>("hasBlee", (myInventory.NumBlee > 0)));
+        WorldData.Add(new KeyValuePair<string, object>("hasBread", (myInventory.NumBreads > 0)));
 
         return WorldData;
     }
@@ -46,11 +49,14 @@ public abstract class People : MonoBehaviour, IGoap
         Vector3 tempDest = nextAction.MyTarget.transform.position + (Vector3.Normalize(transform.position - nextAction.MyTarget.transform.position) * remainingDistance);
         if (!hasAlreadyADestination)
         {
-            agent.destination = tempDest;
+            NavMeshHit hit;
+            bool hasFindResult = true;
+            hasFindResult = NavMesh.SamplePosition(tempDest, out hit, 10.0f, NavMesh.AllAreas);
+            agent.destination = hit.position;
             hasAlreadyADestination = true;
         }
 
-        if (Vector3.Distance(tempDest, transform.position) <= 1.5f)
+        if (Vector3.Distance(agent.destination, transform.position) <= 1.5f)
         {
             nextAction.SetInRange(true);
             hasAlreadyADestination = false;

@@ -10,6 +10,10 @@ public class PeopleInventory : MonoBehaviour
     private int numOres;
     [SerializeField]
     private int numFoods;
+    [SerializeField]
+    private int numBlee;
+    [SerializeField]
+    private int numBreads;
 
     public int NumLogs
     {
@@ -21,18 +25,6 @@ public class PeopleInventory : MonoBehaviour
         set
         {
             numLogs = value;
-        }
-    }
-    public int NumFoods
-    {
-        get
-        {
-            return numFoods;
-        }
-
-        set
-        {
-            numFoods = value;
         }
     }
     public int NumOres
@@ -47,5 +39,28 @@ public class PeopleInventory : MonoBehaviour
             numOres = value;
         }
     }
-    
+    public int NumBlee
+    {
+        get
+        {
+            return numBlee;
+        }
+
+        set
+        {
+            numBlee = value;
+        }
+    }
+    public int NumBreads
+    {
+        get
+        {
+            return numBreads;
+        }
+
+        set
+        {
+            numBreads = value;
+        }
+    }
 }
